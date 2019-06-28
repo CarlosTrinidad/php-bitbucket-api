@@ -1,5 +1,5 @@
 <?php
-
+  namespace PHPBitbucketApi;
 /**
  * Pager for requests
  */
@@ -7,7 +7,7 @@ class Pager
 {
     protected $url;
     protected $options;
-    protected $result;
+    protected $result = null;
     protected $next = null;
     protected $prev = null;
 
@@ -34,8 +34,11 @@ class Pager
         return array('http' => $http);
     }
 
-    public function fetch()
+    public function fetch($cache = false)
     {
+      if ($cache === true && $this->result !== null) {
+        return $this->result;
+      }
       $context  = stream_context_create($this->options);
       $result = file_get_contents($this->url, false, $context);
       if ($result === false) {

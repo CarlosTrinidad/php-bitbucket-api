@@ -1,5 +1,8 @@
 <?php
+namespace PHPBitbucketApi;
 include_once('Pager.php');
+
+use PHPBitbucketApi\Pager;
 
 // $page = new Pager();
 //
